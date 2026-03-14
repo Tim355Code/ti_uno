@@ -39,7 +39,7 @@ def random_card(force_color = False):
         return (random.randint(0, 3) << 4) | number
     special = 10 + random.randint(0, 4)
     if force_color or special < 13: return special | (random.randint(0, 3) << 4)
-    else: return special | 4
+    else: return special | (4 << 4)
         
 def ask_color():
     while True:
@@ -132,7 +132,7 @@ def game_loop():
                 print(center(p_col + "Press ENTER to end turn."))
                 input("")
                 skip = False
-                break
+                continue
 
             # Ask player to perform an action
             drawn = False
