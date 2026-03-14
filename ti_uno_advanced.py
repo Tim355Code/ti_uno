@@ -1,14 +1,14 @@
 import random
 
-CLEAR = '\033[0;255m'
-COL_VALUE = bytearray(b'\x01\x04\x02\x03\x05')
-def colors(i):
-    return '\033[' + str(COL_VALUE[i]) + ';255m'
-
-##CLEAR = '\033[00m'
-##COL_VALUE = bytearray(b'[\"\\]#')
+##CLEAR = '\033[0;255m'
+##COL_VALUE = bytearray(b'\x01\x04\x02\x03\x05')
 ##def colors(i):
-##    return '\033[' + str(COL_VALUE[i]) + 'm'
+##    return '\033[' + str(COL_VALUE[i]) + ';255m'
+
+CLEAR = '\033[00m'
+COL_VALUE = bytearray(b'[\"\\]#')
+def colors(i):
+    return '\033[' + str(COL_VALUE[i]) + 'm'
 
 CARDS_PER_PLAYER = 32
 
@@ -155,7 +155,6 @@ def game_loop():
 
                 if played and placed_card:
                     last_special = (last_played & 15) - 9
-                    print(last_special)
                     if last_special == 1:
                         debt[0] += 2
                         debt[1] = 1
@@ -207,7 +206,7 @@ def game_loop():
                 if len(str(choice)) == 4:
                     if uno & (1 << i) != 0:
                         status_msg = "Already declared UNO."
-                    elif new_codes & (i << 1) != 0:
+                    elif new_codes & (i << i) != 0:
                         status_msg = "You can try next time."
                     elif (choice % 251) != codes[i]:
                         new_codes |= (1 << i)
